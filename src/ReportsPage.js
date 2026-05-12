@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const s = {
-  app: { fontFamily: "'DM Sans', sans-serif", maxWidth: '420px', margin: '0 auto', minHeight: '100vh', background: '#050f05', color: '#e8f0e8', paddingBottom: '40px', position: 'relative', overflowX: 'hidden' },
+  app: { fontFamily: "'DM Sans', sans-serif", maxWidth: '40px', margin: '0 auto', minHeight: '100vh', background: '#050f05', color: '#e8f0e8', paddingBottom: '40px', position: 'relative', overflowX: 'hidden' },
   gridBg: { position: 'absolute', top: 0, left: 0, right: 0, height: '300px', backgroundImage: 'linear-gradient(rgba(74,222,128,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(74,222,128,0.04) 1px,transparent 1px)', backgroundSize: '30px 30px', pointerEvents: 'none' },
   orb: { position: 'absolute', width: '300px', height: '300px', background: 'radial-gradient(circle,rgba(34,197,94,0.08) 0%,transparent 70%)', borderRadius: '50%', top: '-80px', right: '-80px', pointerEvents: 'none' },
   header: { padding: '40px 24px 20px', position: 'relative', display: 'flex', alignItems: 'center', gap: '12px' },
@@ -247,7 +247,7 @@ Foods for each deficiency.
 
         {activeTab === 'history' && (
           <div style={s.section}>
-            <div style={s.sectionLabel}>// past_reports</div>
+            <div style={s.sectionLabel}> past_reports</div>
             {PAST_REPORTS.map((r, i) => (
               <div key={i} style={s.histCard}>
                 <div style={{ fontSize: '22px' }}>{r.icon}</div>

@@ -63,7 +63,7 @@ export default function ProfilePage({ onBack }) {
   const [heartRate, setHeartRate] = useState(72);
   const [steps, setSteps] = useState(4821);
   const [calories, setCalories] = useState(312);
-  const [sleep, setSleep] = useState(7.2);
+  const [sleep] = useState(7.2);
   const [oxygen, setOxygen] = useState(98);
 
   useEffect(() => {
