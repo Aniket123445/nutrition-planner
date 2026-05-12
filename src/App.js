@@ -5,7 +5,7 @@ import ReportsPage from './ReportsPage';
 import ProgressPage from './ProgressPage';
 
 const styles = {
-  app: { fontFamily: "'DM Sans', sans-serif", maxWidth: '420px', margin: '0 auto', minHeight: '100vh', background: '#0d130d', color: '#e8f0e8', position: 'relative', overflowX: 'hidden', paddingBottom: '70px' },
+  app: { fontFamily: "'DM Sans', sans-serif", maxWidth: '100%', margin: '0 auto', minHeight: '100vh', background: '#0d130d', color: '#e8f0e8', position: 'relative', overflowX: 'hidden', paddingBottom: '70px' },
   orb1: { position: 'absolute', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%)', borderRadius: '50%', top: '-80px', right: '-80px', pointerEvents: 'none' },
   orb2: { position: 'absolute', width: '200px', height: '200px', background: 'radial-gradient(circle, rgba(251,191,36,0.08) 0%, transparent 70%)', borderRadius: '50%', bottom: '200px', left: '-60px', pointerEvents: 'none' },
   header: { padding: '48px 24px 24px', position: 'relative' },
@@ -35,7 +35,7 @@ const styles = {
   healthBadge: { display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 14px', background: 'rgba(74,222,128,0.12)', border: '1px solid rgba(74,222,128,0.2)', borderRadius: '100px', fontSize: '13px', color: '#4ade80', fontWeight: '500' },
   resultText: { fontSize: '13px', color: '#8fa88f', lineHeight: '1.7', marginTop: '12px', whiteSpace: 'pre-wrap' },
   loadingText: { fontSize: '14px', color: '#4ade80', textAlign: 'center', padding: '20px' },
-  bottomNav: { display: 'flex', justifyContent: 'space-around', padding: '12px 24px 20px', borderTop: '1px solid rgba(255,255,255,0.05)', position: 'fixed', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: '420px', background: '#0d130d', zIndex: 100 },
+  bottomNav: { display: 'flex', justifyContent: 'space-around', padding: '12px 24px 20px', borderTop: '1px solid rgba(255,255,255,0.05)', position: 'fixed', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: '100%', background: '#0d130d', zIndex: 100 },
   navItem: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' },
   navIcon: { fontSize: '20px' },
   navLabel: { fontSize: '10px', color: '#3a4f3a', letterSpacing: '0.04em' },
