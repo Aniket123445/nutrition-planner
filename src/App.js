@@ -146,11 +146,42 @@ TIPS: Breakfast: Poha + Chai (280 kcal)\nLunch: Dal + Roti + Sabzi + Curd (520 k
     </div>
   );
 
-  if (tab === 'profile') return <><ProfilePage onBack={() => setTab('photo')} /><BottomNav /></>;
-  if (tab === 'deficiency') return <><DeficiencyPage onBack={() => setTab('photo')} reportDeficiencies={reportDeficiencies} /><BottomNav /></>;
-  if (tab === 'reports') return <><ReportsPage onBack={() => setTab('photo')} onDeficienciesFound={(data) => { setReportDeficiencies(data); setTab('deficiency'); }} /><BottomNav /></>;
-  if (tab === 'progress') return <><ProgressPage onBack={() => setTab('photo')} /><BottomNav /></>;
-  if (tab === 'health') return <><HealthSyncPage onBack={() => setTab('photo')} /><BottomNav /></>;
+  if (tab !== 'photo' && tab !== 'manual' && tab !== 'plan') {
+    const pages = {
+      profile: <ProfilePage onBack={() => setTab('photo')} />,
+      deficiency: <DeficiencyPage onBack={() => setTab('photo')} reportDeficiencies={reportDeficiencies} />,
+      reports: <ReportsPage onBack={() => setTab('photo')} onDeficienciesFound={(data) => { setReportDeficiencies(data); setTab('deficiency'); }} />,
+      progress: <ProgressPage onBack={() => setTab('photo')} />,
+      health: <HealthSyncPage onBack={() => setTab('photo')} />,
+    };
+    return (
+      <>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        <div style={{ paddingBottom: '70px' }}>
+          {pages[tab]}
+        </div>
+        <div style={styles.bottomNav}>
+          {[['🏠', 'Home'], ['📋', 'Reports'], ['💊', 'Deficiency'], ['📊', 'Progress'], ['⌚', 'Health'], ['👤', 'Profile']].map(([icon, label]) => (
+            <div key={label} style={styles.navItem} onClick={() => {
+              if (label === 'Home') setTab('photo');
+              if (label === 'Profile') setTab('profile');
+              if (label === 'Deficiency') setTab('deficiency');
+              if (label === 'Reports') setTab('reports');
+              if (label === 'Progress') setTab('progress');
+              if (label === 'Health') setTab('health');
+            }}>
+              <div style={styles.navIcon}>{icon}</div>
+              <div style={styles.navLabel}>{label}</div>
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  }
+
+
+
+
 
   return (
     <>
