@@ -3,7 +3,7 @@ import ProfilePage from './ProfilePage';
 import DeficiencyPage from './DeficiencyPage';
 import ReportsPage from './ReportsPage';
 import ProgressPage from './ProgressPage';
-
+import HealthSyncPage from './HealthSyncPage';
 const styles = {
   app: { fontFamily: "'DM Sans', sans-serif", maxWidth: '100%', margin: '0 auto', minHeight: '100vh', background: '#0d130d', color: '#e8f0e8', position: 'relative', overflowX: 'hidden', paddingBottom: '70px' },
   orb1: { position: 'absolute', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%)', borderRadius: '50%', top: '-80px', right: '-80px', pointerEvents: 'none' },
@@ -129,7 +129,7 @@ TIPS: Breakfast: Poha + Chai (280 kcal)\nLunch: Dal + Roti + Sabzi + Curd (520 k
 
   const BottomNav = () => (
     <div style={styles.bottomNav}>
-      {[['🏠', 'Home'], ['📋', 'Reports'], ['💊', 'Deficiency'], ['📊', 'Progress'], ['👤', 'Profile']].map(([icon, label]) => (
+      {[['🏠', 'Home'], ['📋', 'Reports'], ['💊', 'Deficiency'], ['📊', 'Progress'], ['⌚', 'Health'], ['👤', 'Profile']].map(([icon, label]) => (
         <div key={label} style={styles.navItem} onClick={() => {
           if (label === 'Profile') setTab('profile');
           if (label === 'Deficiency') setTab('deficiency');
@@ -148,7 +148,7 @@ TIPS: Breakfast: Poha + Chai (280 kcal)\nLunch: Dal + Roti + Sabzi + Curd (520 k
   if (tab === 'deficiency') return <><DeficiencyPage onBack={() => setTab('photo')} reportDeficiencies={reportDeficiencies} /><BottomNav /></>;
   if (tab === 'reports') return <><ReportsPage onBack={() => setTab('photo')} onDeficienciesFound={(data) => { setReportDeficiencies(data); setTab('deficiency'); }} /><BottomNav /></>;
   if (tab === 'progress') return <><ProgressPage onBack={() => setTab('photo')} /><BottomNav /></>;
-
+if (tab === 'health') return <><HealthSyncPage onBack={() => setTab('photo')} /><BottomNav /></>;
   return (
     <>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
