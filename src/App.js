@@ -139,21 +139,29 @@ TIPS: Breakfast: [meal] ([calories] kcal)\nLunch: [meal] ([calories] kcal)\nSnac
     return { food: get('FOOD'), calories: get('CALORIES'), protein: get('PROTEIN'), carbs: get('CARBS'), health: get('HEALTH'), tips: get('TIPS') };
   };
 
+  const NAV_ITEMS = [
+    { label: 'Home', page: 'photo', icon: (active) => <svg width="22" height="22" viewBox="0 0 24 24" fill={active ? '#4ade80' : 'none'} stroke={active ? '#4ade80' : '#3a4f3a'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" stroke={active ? '#060d06' : '#3a4f3a'} fill="none"/></svg> },
+    { label: 'Reports', page: 'reports', icon: (active) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? '#4ade80' : '#3a4f3a'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> },
+    { label: 'Deficiency', page: 'deficiency', icon: (active) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? '#4ade80' : '#3a4f3a'} strokeWidth="1.5" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> },
+    { label: 'Progress', page: 'progress', icon: (active) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? '#4ade80' : '#3a4f3a'} strokeWidth="1.5" strokeLinecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
+    { label: 'Health', page: 'health', icon: (active) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? '#4ade80' : '#3a4f3a'} strokeWidth="1.5" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
+    { label: 'Profile', page: 'profile', icon: (active) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? '#4ade80' : '#3a4f3a'} strokeWidth="1.5" strokeLinecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+  ];
+
+  const currentPage = ['profile','deficiency','reports','progress','health'].includes(tab) ? tab : 'photo';
+
   const BottomNav = () => (
     <div style={styles.bottomNav}>
-      {[['🏠', 'Home'], ['📋', 'Reports'], ['💊', 'Deficiency'], ['📊', 'Progress'], ['⌚', 'Health'], ['👤', 'Profile']].map(([icon, label]) => (
-        <div key={label} style={styles.navItem} onClick={() => {
-          if (label === 'Home') setTab('photo');
-          if (label === 'Profile') setTab('profile');
-          if (label === 'Deficiency') setTab('deficiency');
-          if (label === 'Reports') setTab('reports');
-          if (label === 'Progress') setTab('progress');
-          if (label === 'Health') setTab('health');
-        }}>
-          <div style={styles.navIcon}>{icon}</div>
-          <div style={styles.navLabel}>{label}</div>
-        </div>
-      ))}
+      {NAV_ITEMS.map(({ label, page, icon }) => {
+        const active = currentPage === page;
+        return (
+          <div key={label} style={{ ...styles.navItem }} onClick={() => setTab(page)}>
+            {icon(active)}
+            {active && <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#4ade80', margin: '0 auto' }} />}
+            <div style={{ fontSize: '10px', color: active ? '#4ade80' : '#3a4f3a', letterSpacing: '0.04em' }}>{label}</div>
+          </div>
+        );
+      })}
     </div>
   );
 
