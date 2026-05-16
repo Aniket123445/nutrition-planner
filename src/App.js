@@ -225,9 +225,9 @@ TIPS: Breakfast: [meal] ([calories] kcal)\nLunch: [meal] ([calories] kcal)\nSnac
 
         {/* Quick Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', padding: '0 24px 20px' }}>
-          {[['🔥', '1,842', 'Calories'], ['💧', '6/8', 'Water'], ['👟', '6.2k', 'Steps']].map(([icon, val, label]) => (
+          {[[<svg key="c" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>, '1,842', 'Calories'], [<svg key="w" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>, '6/8', 'Water'], [<svg key="s" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="m7 21 5-5"/><path d="m11 21 5-12"/><path d="M5 9a2 2 0 0 1 2-2h1l3 6-3 3H5"/></svg>, '6.2k', 'Steps']].map(([icon, val, label]) => (
             <div key={label} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '18px', padding: '14px 12px', textAlign: 'center' }}>
-              <div style={{ fontSize: '20px', marginBottom: '6px' }}>{icon}</div>
+              <div style={{ marginBottom: '6px', display: 'flex', justifyContent: 'center' }}>{icon}</div>
               <div style={{ fontSize: '17px', fontWeight: '600', color: '#f0faf0' }}>{val}</div>
               <div style={{ fontSize: '10px', color: '#4a5f4a', marginTop: '2px' }}>{label}</div>
             </div>
@@ -272,7 +272,7 @@ TIPS: Breakfast: [meal] ([calories] kcal)\nLunch: [meal] ([calories] kcal)\nSnac
               <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }}/>
             </div>
             <button style={{ width: '100%', padding: '16px', background: 'linear-gradient(135deg,#4ade80,#22c55e)', border: 'none', borderRadius: '16px', color: '#0a1f0a', fontSize: '15px', fontWeight: '700', cursor: 'pointer', fontFamily: "'DM Sans',sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '20px' }} onClick={analysePhoto}>
-              <div style={{ width: '26px', height: '26px', background: 'rgba(0,0,0,0.12)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px' }}>🤖</div>
+              <div style={{ width: '26px', height: '26px', background: 'rgba(0,0,0,0.12)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0a1f0a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
               {loading ? 'Analysing...' : 'Analyse with AI →'}
             </button>
           </>)}
