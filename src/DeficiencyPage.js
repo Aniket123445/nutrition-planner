@@ -62,7 +62,6 @@ const DEFAULT_DEFICIENCIES = [
 ];
 
 const API_KEY = process.env.REACT_APP_GEMINI_KEY;
-const CATEGORIES = [['all', 'All'], ['vitamins', 'Vitamins'], ['minerals', 'Minerals'], ['blood', 'Blood']];
 const FILTERS = [['all', 'All'], ['low', 'Critical'], ['medium', 'Moderate'], ['good', 'Good']];
 
 export default function DeficiencyPage({ onBack, reportDeficiencies }) {
