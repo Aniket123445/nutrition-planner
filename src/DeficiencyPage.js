@@ -62,7 +62,7 @@ const DEFAULT_DEFICIENCIES = [
 ];
 
 const API_KEY = process.env.REACT_APP_GEMINI_KEY;
-const CATEGORIES = [['all', '🔬 All'], ['vitamins', '💊 Vitamins'], ['minerals', '⛏️ Minerals'], ['blood', '🩸 Blood']];
+const CATEGORIES = [['all', 'All'], ['vitamins', 'Vitamins'], ['minerals', 'Minerals'], ['blood', 'Blood']];
 const FILTERS = [['all', 'All'], ['low', 'Critical'], ['medium', 'Moderate'], ['good', 'Good']];
 
 export default function DeficiencyPage({ onBack, reportDeficiencies }) {
@@ -108,7 +108,12 @@ Give 5 practical Indian diet tips. Be friendly and specific to Indian foods. Use
         <div style={s.orb} />
         <div style={s.header}>
           <div style={s.backBtn} onClick={onBack}>←</div>
-          <div style={s.headerTitle}>💊 Deficiency Tracker</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <span style={s.headerTitle}>Deficiency Tracker</span>
+          </div>
           <div style={s.pill}>AI Powered</div>
         </div>
 
@@ -134,8 +139,15 @@ Give 5 practical Indian diet tips. Be friendly and specific to Indian foods. Use
         </div>
 
         <div style={s.categoryTabs}>
-          {CATEGORIES.map(([val, label]) => (
-            <button key={val} style={s.catTab(category === val)} onClick={() => setCategory(val)}>{label}</button>
+          {[
+            ['all', <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/></svg>, 'All'],
+            ['vitamins', <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="8" r="4"/><path d="M20 20v-2a4 4 0 0 0-8 0"/></svg>, 'Vitamins'],
+            ['minerals', <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>, 'Minerals'],
+            ['blood', <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>, 'Blood'],
+          ].map(([val, icon, label]) => (
+            <button key={val} style={{ ...s.catTab(category === val), display: 'flex', alignItems: 'center', gap: '5px' }} onClick={() => setCategory(val)}>
+              {icon}{label}
+            </button>
           ))}
         </div>
 
