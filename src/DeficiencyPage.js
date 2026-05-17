@@ -62,7 +62,7 @@ const DEFAULT_DEFICIENCIES = [
 ];
 
 const API_KEY = process.env.REACT_APP_GEMINI_KEY;
-const FILTERS = [['all', 'All'], ['low', 'Critical'], ['medium', 'Moderate'], ['good', 'Good']];
+const FILTERS = [['all', 'All'], ['low', 'Critical'], ['medium', 'Moderate'], ['good', 'Good']];   
 
 export default function DeficiencyPage({ onBack, reportDeficiencies }) {
   const [category, setCategory] = useState('all');
