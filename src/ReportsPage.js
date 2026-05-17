@@ -1,50 +1,28 @@
 import React, { useState } from 'react';
 
-const s = {
-  app: { fontFamily: "'DM Sans', sans-serif", width: '100%', minHeight: '100vh', background: '#050f05', color: '#e8f0e8', paddingBottom: '80px', position: 'relative' },
-  header: { padding: '40px 24px 20px', display: 'flex', alignItems: 'center', gap: '12px' },
-  backBtn: { width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(74,222,128,0.07)', border: '1px solid rgba(74,222,128,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '16px', color: '#4ade80', flexShrink: 0 },
-  headerTitle: { fontSize: '18px', fontWeight: '600', color: '#f0faf0' },
-  pill: { fontSize: '11px', color: '#4ade80', background: 'rgba(74,222,128,0.1)', border: '1px solid rgba(74,222,128,0.2)', padding: '4px 12px', borderRadius: '100px', marginLeft: 'auto', fontFamily: 'monospace', whiteSpace: 'nowrap' },
-  tabRow: { display: 'flex', gap: '8px', padding: '0 24px 20px' },
-  tab: (a) => ({ flex: 1, padding: '10px', borderRadius: '10px', border: `1px solid ${a ? 'rgba(74,222,128,0.3)' : 'rgba(255,255,255,0.06)'}`, background: a ? 'rgba(74,222,128,0.08)' : 'transparent', color: a ? '#4ade80' : '#4a5f4a', fontSize: '12px', cursor: 'pointer', fontFamily: 'monospace', letterSpacing: '0.02em', textAlign: 'center' }),
-  uploadBox: { margin: '0 24px 20px', background: 'rgba(74,222,128,0.03)', border: '1px solid rgba(74,222,128,0.15)', borderRadius: '16px', padding: '32px 24px', textAlign: 'center', cursor: 'pointer' },
-  uploadIconWrap: { width: '56px', height: '56px', background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.2)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', margin: '0 auto 14px' },
-  uploadTitle: { fontSize: '15px', fontWeight: '500', color: '#c8e6c8', marginBottom: '6px' },
-  uploadSub: { fontSize: '12px', color: '#3a5f3a', marginBottom: '14px' },
-  uploadTypes: { display: 'flex', justifyContent: 'center', gap: '8px' },
-  typeBadge: { fontFamily: 'monospace', fontSize: '10px', padding: '4px 10px', background: 'rgba(74,222,128,0.06)', border: '1px solid rgba(74,222,128,0.15)', borderRadius: '6px', color: '#4ade80' },
-  previewBox: { borderRadius: '16px', overflow: 'hidden', margin: '0 24px 16px', border: '1px solid rgba(74,222,128,0.2)' },
-  pdfPreview: { background: 'rgba(74,222,128,0.06)', padding: '20px', display: 'flex', alignItems: 'center', gap: '12px' },
-  analyseBtn: { margin: '0 24px 20px', width: 'calc(100% - 48px)', padding: '16px', background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.3)', borderRadius: '12px', color: '#4ade80', fontSize: '14px', fontWeight: '500', fontFamily: 'monospace', cursor: 'pointer', letterSpacing: '0.05em', display: 'block' },
-  loadingCard: { margin: '0 24px 16px', background: 'rgba(74,222,128,0.06)', border: '1px solid rgba(74,222,128,0.15)', borderRadius: '16px', padding: '20px', textAlign: 'center' },
-  loadingText: { fontSize: '14px', color: '#4ade80', marginBottom: '8px' },
-  loadingStep: { fontSize: '12px', color: '#4a5f4a', fontFamily: 'monospace' },
-  successCard: { margin: '0 24px 16px', background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.3)', borderRadius: '16px', padding: '20px', textAlign: 'center' },
-  successText: { fontSize: '15px', fontWeight: '600', color: '#4ade80', marginBottom: '6px' },
-  successSub: { fontSize: '12px', color: '#4a5f4a' },
-  metricsRow: { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', padding: '0 24px 20px' },
-  metric: (type) => ({ background: 'rgba(255,255,255,0.02)', border: `1px solid ${type === 'critical' ? 'rgba(239,68,68,0.3)' : type === 'moderate' ? 'rgba(251,191,36,0.3)' : 'rgba(74,222,128,0.3)'}`, borderRadius: '12px', padding: '12px 8px', textAlign: 'center' }),
-  metricVal: (type) => ({ fontFamily: 'monospace', fontSize: '24px', fontWeight: '500', color: type === 'critical' ? '#f87171' : type === 'moderate' ? '#fbbf24' : '#4ade80' }),
-  metricLabel: { fontSize: '10px', color: '#3a5f3a', marginTop: '3px', letterSpacing: '0.05em', textTransform: 'uppercase' },
-  resultCard: { margin: '0 24px 16px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(74,222,128,0.12)', borderRadius: '16px', overflow: 'hidden' },
-  resultHeader: { padding: '12px 16px', background: 'rgba(74,222,128,0.05)', borderBottom: '1px solid rgba(74,222,128,0.1)', display: 'flex', alignItems: 'center', gap: '8px' },
-  resultHeaderDot: { width: '6px', height: '6px', background: '#4ade80', borderRadius: '50%', flexShrink: 0 },
-  resultHeaderText: { fontFamily: 'monospace', fontSize: '11px', color: '#4ade80', letterSpacing: '0.05em' },
-  resultBody: { padding: '16px' },
-  resultText: { fontSize: '12px', color: '#6b7f6b', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word' },
-  histCard: { background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '14px 16px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '12px' },
-  histTitle: { fontSize: '13px', fontWeight: '500', color: '#c8e6c8' },
-  histDate: { fontFamily: 'monospace', fontSize: '11px', color: '#3a5f3a', marginTop: '3px' },
-  histScore: (good) => ({ fontFamily: 'monospace', fontSize: '13px', fontWeight: '500', color: good ? '#4ade80' : '#f87171', marginLeft: 'auto', flexShrink: 0 }),
-  section: { padding: '0 24px' },
-  sectionLabel: { fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#4ade80', marginBottom: '12px' },
-};
+const css = `
+  @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  @keyframes fillBar { from{width:0%} to{width:var(--w)} }
+  .fade1{animation:fadeUp 0.4s ease both}
+  .fade2{animation:fadeUp 0.4s ease 0.1s both}
+  .fade3{animation:fadeUp 0.4s ease 0.2s both}
+  .fade4{animation:fadeUp 0.4s ease 0.3s both}
+  .fade5{animation:fadeUp 0.4s ease 0.4s both}
+  .pulse-dot{width:5px;height:5px;background:#4ade80;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block}
+  .upload-row{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:16px;cursor:pointer;transition:all 0.2s;margin-bottom:10px}
+  .upload-row:hover{border-color:rgba(74,222,128,0.25);background:rgba(74,222,128,0.03)}
+  .analyse-btn{width:100%;padding:15px;background:linear-gradient(135deg,#4ade80,#22c55e);border:none;border-radius:14px;color:#0a1f0a;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px;transition:transform 0.2s,box-shadow 0.2s}
+  .analyse-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(74,222,128,0.25)}
+  .hist-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.2s}
+  .hist-card:hover{border-color:rgba(74,222,128,0.2)}
+  .loading-card{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:16px;padding:20px;text-align:center;margin-bottom:16px}
+`;
 
 const PAST_REPORTS = [
-  { icon: '🩸', title: 'Blood Test Report', date: '2026.04.12', score: 68, good: false },
-  { icon: '🫀', title: 'Full Body Checkup', date: '2026.02.28', score: 74, good: true },
-  { icon: '🧪', title: 'Vitamin Panel Test', date: '2026.01.05', score: 61, good: false },
+  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" strokeWidth="1.5" strokeLinecap="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>, bg: 'rgba(239,68,68,0.08)', border: 'rgba(239,68,68,0.12)', title: 'Blood Test Report', date: 'Apr 12, 2026', score: 68, color: '#f87171' },
+  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>, bg: 'rgba(74,222,128,0.08)', border: 'rgba(74,222,128,0.12)', title: 'Full Body Checkup', date: 'Feb 28, 2026', score: 74, color: '#4ade80' },
+  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>, bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.12)', title: 'Vitamin Panel Test', date: 'Jan 5, 2026', score: 61, color: '#fbbf24' },
 ];
 
 const LOADING_STEPS = ['Reading your report...', 'Identifying nutrients...', 'Detecting deficiencies...', 'Generating doctor notes...', 'Syncing to Deficiency page...'];
@@ -68,7 +46,6 @@ const FULL_DEFICIENCY_TEMPLATE = [
 const API_KEY = process.env.REACT_APP_GEMINI_KEY;
 
 export default function ReportsPage({ onBack, onDeficienciesFound }) {
-  const [activeTab, setActiveTab] = useState('upload');
   const [image, setImage] = useState(null);
   const [imageBase64, setImageBase64] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
@@ -95,9 +72,9 @@ export default function ReportsPage({ onBack, onDeficienciesFound }) {
     const stepInterval = setInterval(() => setLoadingStep(prev => Math.min(prev + 1, LOADING_STEPS.length - 1)), 1500);
     try {
       const parts = imageBase64 ? [
-        { text: `You are an expert doctor and Indian nutritionist. Analyse this medical report and provide:\n\n// 01. REPORT_SUMMARY\nBrief overview.\n\n// 02. DEFICIENCIES_DETECTED\nList each with: [Name] → [Value] [CRITICAL/MODERATE/NORMAL]\n\n// 03. DOCTOR_NOTES\nRecommendations.\n\n// 04. INDIAN_FOOD_PROTOCOL\nSpecific Indian foods.\n\n// 05. ACTION_PLAN\n[01] Step\n[02] Step\n[03] Step` },
+        { text: `You are an expert doctor and Indian nutritionist. Analyse this medical report and provide:\n\nREPORT SUMMARY\nBrief overview.\n\nDEFICIENCIES DETECTED\nList each with: [Name] → [Value] [CRITICAL/MODERATE/NORMAL]\n\nDOCTOR NOTES\nRecommendations.\n\nINDIAN FOOD SUGGESTIONS\nSpecific Indian foods.\n\nACTION PLAN\n1. Step\n2. Step\n3. Step` },
         { inline_data: { mime_type: 'image/jpeg', data: imageBase64 } }
-      ] : [{ text: `Provide a sample medical analysis:\n\n// 01. REPORT_SUMMARY\nGeneral health overview.\n\n// 02. DEFICIENCIES_DETECTED\nVitamin D → 12 ng/mL [CRITICAL]\nIron → 45 µg/dL [CRITICAL]\nHemoglobin → 10.2 g/dL [CRITICAL]\nCalcium → 8.1 mg/dL [MODERATE]\nVitamin B12 → 180 pg/mL [MODERATE]\n\n// 03. DOCTOR_NOTES\nSeek medical attention.\n\n// 04. INDIAN_FOOD_PROTOCOL\nPalak dal for iron, ragi for calcium.\n\n// 05. ACTION_PLAN\n[01] Start supplements\n[02] Improve diet\n[03] Follow up in 90 days` }];
+      ] : [{ text: `Provide a sample medical analysis:\n\nREPORT SUMMARY\nGeneral health overview.\n\nDEFICIENCIES DETECTED\nVitamin D → 12 ng/mL [CRITICAL]\nIron → 45 µg/dL [CRITICAL]\nHemoglobin → 10.2 g/dL [CRITICAL]\nCalcium → 8.1 mg/dL [MODERATE]\nVitamin B12 → 180 pg/mL [MODERATE]\n\nDOCTOR NOTES\nSeek medical attention.\n\nINDIAN FOOD SUGGESTIONS\nPalak dal for iron, ragi for calcium.\n\nACTION PLAN\n1. Start supplements\n2. Improve diet\n3. Follow up in 90 days` }];
 
       const res = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
@@ -131,74 +108,143 @@ export default function ReportsPage({ onBack, onDeficienciesFound }) {
   const moderate = result ? (result.match(/\[MODERATE\]/g) || []).length : 0;
   const normal = result ? (result.match(/\[NORMAL\]/g) || []).length : 0;
 
+  const s = {
+    app: { fontFamily: "'DM Sans',sans-serif", width: '100%', minHeight: '100vh', background: '#060d06', color: '#e8f0e8', paddingBottom: '80px' },
+    header: { padding: '40px 24px 20px', display: 'flex', alignItems: 'center', gap: '12px' },
+    backBtn: { width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(74,222,128,0.07)', border: '1px solid rgba(74,222,128,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#4ade80', flexShrink: 0 },
+    uploadIcon: { width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(74,222,128,0.07)', border: '1px solid rgba(74,222,128,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+    fmt: { fontSize: '10px', padding: '3px 8px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '6px', color: '#6b7f6b', fontFamily: 'monospace' },
+    statBox: (type) => ({ borderRadius: '14px', padding: '14px 10px', textAlign: 'center', background: type === 'crit' ? 'rgba(239,68,68,0.06)' : type === 'mod' ? 'rgba(251,191,36,0.06)' : 'rgba(74,222,128,0.06)', border: `1px solid ${type === 'crit' ? 'rgba(239,68,68,0.2)' : type === 'mod' ? 'rgba(251,191,36,0.2)' : 'rgba(74,222,128,0.2)'}` }),
+    statNum: (type) => ({ fontSize: '26px', fontWeight: '600', color: type === 'crit' ? '#f87171' : type === 'mod' ? '#fbbf24' : '#4ade80' }),
+    defTag: (type) => ({ fontSize: '11px', padding: '5px 12px', borderRadius: '100px', background: type === 'crit' ? 'rgba(239,68,68,0.1)' : 'rgba(251,191,36,0.1)', border: `1px solid ${type === 'crit' ? 'rgba(239,68,68,0.2)' : 'rgba(251,191,36,0.2)'}`, color: type === 'crit' ? '#f87171' : '#fbbf24' }),
+  };
+
   return (
     <>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap'); * { box-sizing: border-box; }`}</style>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap'); ${css}`}</style>
       <div style={s.app}>
-        <div style={s.header}>
+
+        <div className="fade1" style={s.header}>
           <div style={s.backBtn} onClick={onBack}>←</div>
-          <div style={s.headerTitle}>Medical Reports</div>
-          <div style={s.pill}>AI Powered</div>
+          <div style={{ fontSize: '18px', fontWeight: '600', color: '#f0faf0' }}>Medical Reports</div>
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.2)', padding: '4px 12px', borderRadius: '100px', fontSize: '11px', color: '#4ade80' }}>
+            <span className="pulse-dot" /> AI Powered
+          </div>
         </div>
 
-        <div style={s.tabRow}>
-          <button style={s.tab(activeTab === 'upload')} onClick={() => setActiveTab('upload')}>[ UPLOAD ]</button>
-          <button style={s.tab(activeTab === 'history')} onClick={() => setActiveTab('history')}>[ HISTORY ]</button>
-        </div>
+        <div className="fade2" style={{ padding: '0 24px' }}>
+          <div style={{ fontSize: '12px', color: '#6b7f6b', marginBottom: '10px' }}>Upload your report</div>
 
-        {activeTab === 'upload' && (<>
-          <div style={s.uploadBox} onClick={() => document.getElementById('report-file').click()}>
-            <div style={s.uploadIconWrap}>📄</div>
-            <div style={s.uploadTitle}>Upload Medical Report</div>
-            <div style={s.uploadSub}>Blood test · Vitamin panel · Full body checkup</div>
-            <div style={s.uploadTypes}>
-              <div style={s.typeBadge}>JPG</div>
-              <div style={s.typeBadge}>PNG</div>
-              <div style={s.typeBadge}>PDF</div>
+          <div className="upload-row" onClick={() => document.getElementById('photo-input').click()}>
+            <div style={s.uploadIcon}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/>
+              </svg>
             </div>
-            <input id="report-file" type="file" accept="image/*,.pdf" style={{ display: 'none' }} onChange={handleFile} />
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: '14px', fontWeight: '500', color: '#c8e6c8', marginBottom: '3px' }}>Photo of Report</div>
+              <div style={{ fontSize: '12px', color: '#4a5f4a', marginBottom: '8px' }}>Take or choose from gallery</div>
+              <div style={{ display: 'flex', gap: '6px' }}>
+                {['JPG', 'PNG', 'HEIC'].map(f => <div key={f} style={s.fmt}>{f}</div>)}
+              </div>
+            </div>
+            <div style={{ color: '#4ade80', fontSize: '18px', opacity: 0.4 }}>›</div>
+            <input id="photo-input" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFile} />
           </div>
 
-          {image && <div style={s.previewBox}><img src={image} alt="report" style={{ width: '100%', display: 'block' }} /></div>}
-          {pdfFile && <div style={s.previewBox}><div style={s.pdfPreview}><span style={{ fontSize: '32px' }}>📑</span><div><div style={{ fontSize: '14px', color: '#c8e6c8' }}>{pdfFile.name}</div></div></div></div>}
-
-          {(image || pdfFile) && !loading && <button style={s.analyseBtn} onClick={analyseReport}>▶ ANALYSE_REPORT.exe</button>}
-
-          {loading && <div style={s.loadingCard}><div style={s.loadingText}>🤖 AI Doctor is reading your report...</div><div style={s.loadingStep}>{LOADING_STEPS[loadingStep]}</div></div>}
-
-          {synced && result && !loading && (
-            <div style={s.successCard}>
-              <div style={{ fontSize: '36px', marginBottom: '10px' }}>✅</div>
-              <div style={s.successText}>Deficiency page updated!</div>
-              <div style={s.successSub}>Go to 💊 Deficiency tab to see results.</div>
+          <div className="upload-row" onClick={() => document.getElementById('pdf-input').click()}>
+            <div style={s.uploadIcon}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
             </div>
-          )}
-
-          {result && !loading && (<>
-            <div style={s.metricsRow}>
-              <div style={s.metric('critical')}><div style={s.metricVal('critical')}>{String(critical).padStart(2, '0')}</div><div style={s.metricLabel}>Critical</div></div>
-              <div style={s.metric('moderate')}><div style={s.metricVal('moderate')}>{String(moderate).padStart(2, '0')}</div><div style={s.metricLabel}>Moderate</div></div>
-              <div style={s.metric('normal')}><div style={s.metricVal('normal')}>{String(normal).padStart(2, '0')}</div><div style={s.metricLabel}>Normal</div></div>
-            </div>
-            <div style={s.resultCard}>
-              <div style={s.resultHeader}><div style={s.resultHeaderDot} /><div style={s.resultHeaderText}>AI_DOCTOR // FULL_ANALYSIS</div></div>
-              <div style={s.resultBody}><div style={s.resultText}>{result}</div></div>
-            </div>
-          </>)}
-        </>)}
-
-        {activeTab === 'history' && (
-          <div style={s.section}>
-            <div style={s.sectionLabel}>past_reports</div>
-            {PAST_REPORTS.map((r, i) => (
-              <div key={i} style={s.histCard}>
-                <div style={{ fontSize: '22px' }}>{r.icon}</div>
-                <div style={{ flex: 1 }}><div style={s.histTitle}>{r.title}</div><div style={s.histDate}>{r.date}</div></div>
-                <div style={s.histScore(r.good)}>{r.score}/100</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: '14px', fontWeight: '500', color: '#c8e6c8', marginBottom: '3px' }}>PDF Report</div>
+              <div style={{ fontSize: '12px', color: '#4a5f4a', marginBottom: '8px' }}>Upload from lab or hospital</div>
+              <div style={{ display: 'flex', gap: '6px' }}>
+                <div style={s.fmt}>PDF</div>
               </div>
-            ))}
+            </div>
+            <div style={{ color: '#4ade80', fontSize: '18px', opacity: 0.4 }}>›</div>
+            <input id="pdf-input" type="file" accept=".pdf" style={{ display: 'none' }} onChange={handleFile} />
+          </div>
+        </div>
+
+        {image && <img src={image} alt="report" style={{ width: 'calc(100% - 48px)', margin: '10px 24px', borderRadius: '16px', display: 'block' }} />}
+        {pdfFile && (
+          <div style={{ margin: '10px 24px', background: 'rgba(74,222,128,0.06)', border: '1px solid rgba(74,222,128,0.15)', borderRadius: '14px', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <div>
+              <div style={{ fontSize: '13px', color: '#c8e6c8', fontWeight: '500' }}>{pdfFile.name}</div>
+              <div style={{ fontSize: '11px', color: '#4a5f4a' }}>{(pdfFile.size / 1024).toFixed(1)} KB · PDF</div>
+            </div>
           </div>
         )}
+
+        <div className="fade3" style={{ padding: '16px 24px 0' }}>
+          <button className="analyse-btn" onClick={analyseReport}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a1f0a" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            {loading ? 'Analysing...' : 'Analyse with AI Doctor →'}
+          </button>
+        </div>
+
+        {loading && (
+          <div className="loading-card fade3" style={{ margin: '0 24px 16px' }}>
+            <div style={{ fontSize: '14px', color: '#4ade80', marginBottom: '6px' }}>🤖 AI Doctor is reading your report...</div>
+            <div style={{ fontSize: '12px', color: '#4a5f4a' }}>{LOADING_STEPS[loadingStep]}</div>
+          </div>
+        )}
+
+        {synced && result && !loading && (
+          <div style={{ margin: '0 24px 16px', background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.25)', borderRadius: '14px', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <div>
+              <div style={{ fontSize: '13px', fontWeight: '600', color: '#4ade80' }}>Deficiency page updated!</div>
+              <div style={{ fontSize: '11px', color: '#4a5f4a', marginTop: '2px' }}>Go to 💊 Deficiency tab to see results</div>
+            </div>
+          </div>
+        )}
+
+        {result && !loading && (
+          <div className="fade4" style={{ padding: '0 24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', marginBottom: '16px' }}>
+              <div style={s.statBox('crit')}><div style={s.statNum('crit')}>{String(critical).padStart(2,'0')}</div><div style={{ fontSize: '11px', color: '#6b7f6b', marginTop: '3px' }}>Critical</div></div>
+              <div style={s.statBox('mod')}><div style={s.statNum('mod')}>{String(moderate).padStart(2,'0')}</div><div style={{ fontSize: '11px', color: '#6b7f6b', marginTop: '3px' }}>Moderate</div></div>
+              <div style={s.statBox('norm')}><div style={s.statNum('norm')}>{String(normal).padStart(2,'0')}</div><div style={{ fontSize: '11px', color: '#6b7f6b', marginTop: '3px' }}>Normal</div></div>
+            </div>
+
+            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(74,222,128,0.12)', borderRadius: '18px', overflow: 'hidden', marginBottom: '20px' }}>
+              <div style={{ padding: '14px 16px', background: 'rgba(74,222,128,0.05)', borderBottom: '1px solid rgba(74,222,128,0.1)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '6px', height: '6px', background: '#4ade80', borderRadius: '50%' }} />
+                <div style={{ fontSize: '12px', color: '#4ade80', fontWeight: '600' }}>AI Doctor — Full Analysis</div>
+              </div>
+              <div style={{ padding: '16px' }}>
+                <div style={{ fontSize: '13px', color: '#6b7f6b', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{result}</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="fade5" style={{ padding: '0 24px' }}>
+          <div style={{ fontSize: '13px', fontWeight: '600', color: '#f0faf0', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px' }}>Past Reports</div>
+          {PAST_REPORTS.map((r, i) => (
+            <div key={i} className="hist-card">
+              <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: r.bg, border: `1px solid ${r.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{r.icon}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '13px', fontWeight: '500', color: '#c8e6c8' }}>{r.title}</div>
+                <div style={{ fontSize: '11px', color: '#3a5f3a', marginTop: '2px' }}>{r.date}</div>
+              </div>
+              <div style={{ textAlign: 'right', marginLeft: 'auto' }}>
+                <div style={{ fontSize: '14px', fontWeight: '600', color: r.color }}>{r.score}/100</div>
+                <div style={{ width: '60px', height: '4px', background: 'rgba(255,255,255,0.06)', borderRadius: '100px', marginTop: '5px', overflow: 'hidden' }}>
+                  <div style={{ width: `${r.score}%`, height: '100%', background: r.color, borderRadius: '100px' }} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </>
   );
