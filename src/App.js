@@ -189,12 +189,21 @@ TIPS: Breakfast: [meal] ([calories] kcal)\nLunch: [meal] ([calories] kcal)\nSnac
 
         {/* Header — Healthio branding */}
         <div style={{ padding: '52px 24px 20px', position: 'relative' }}>
-          <div style={{ fontSize: '13px', color: '#4a5f4a', marginBottom: '8px' }}>Good morning 🌤️</div>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '2px' }}>
-            <span style={{ fontSize: '30px', fontWeight: '700', color: '#f0faf0', letterSpacing: '-0.5px' }}>Healthio</span>
-            <span style={{ fontSize: '13px', color: '#4ade80', fontWeight: '500', letterSpacing: '0.02em' }}>· AI Nutrition</span>
+          <div style={{ fontSize: '13px', color: '#4a5f4a', marginBottom: '12px' }}>Good morning 🌤️</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px' }}>
+            <div style={{ width: '44px', height: '44px', borderRadius: '13px', background: '#0d130d', border: '1.5px solid #4ade80', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="3 12 6 12 9 4 12 20 15 12 18 12 21 12"/>
+              </svg>
+            </div>
+            <div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '26px', fontWeight: '700', color: '#f0faf0', letterSpacing: '-0.3px', lineHeight: 1 }}>
+                Health<span style={{ color: '#4ade80' }}>io</span>
+              </div>
+              <div style={{ fontSize: '11px', color: '#4a5f4a', letterSpacing: '0.05em', marginTop: '2px' }}>AI · Nutrition · Wellness</div>
+            </div>
           </div>
-          <div style={{ fontSize: '13px', color: '#4a5f4a' }}>Snap, analyse & eat smarter every day</div>
+          <div style={{ fontSize: '13px', color: '#4a5f4a', marginTop: '8px' }}>Snap, analyse & eat smarter every day</div>
           <div style={{ position: 'absolute', top: '48px', right: '24px', width: '46px', height: '46px', borderRadius: '50%', background: 'linear-gradient(135deg,#4ade80,#22c55e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', border: '2px solid rgba(74,222,128,0.3)' }}>🧑</div>
         </div>
 
