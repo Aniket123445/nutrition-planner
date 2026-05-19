@@ -43,7 +43,7 @@ const FULL_DEFICIENCY_TEMPLATE = [
   { name: '❤️ Cholesterol', category: 'blood', level: 'medium', pct: 58, foods: ['Oats', 'Garlic'], tip: 'Borderline — reduce fried foods' },
 ];
 
-const API_KEY = 'AIzaSyCfEAsVNkjJD6H30ZzGic1nSCbtgJICE-4';
+const API_KEY = 'AIzaSyB3FcX-mthxsVcHPCgY51hf45Cic2RlMN0';
 
 export default function ReportsPage({ onBack, onDeficienciesFound }) {
   const [image, setImage] = useState(null);
