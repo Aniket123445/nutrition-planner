@@ -61,7 +61,7 @@ const DEFAULT_DEFICIENCIES = [
   { name: '💪 Protein', category: 'blood', level: 'medium', pct: 61, foods: ['Dal', 'Paneer', 'Sprouts', 'Eggs'], tip: 'Needed for muscle repair & growth' },
 ];
 
-const API_KEY = 'AIzaSyB3FcX-mthxsVcHPCgY51hf45Cic2RlMN0';
+const API_KEY = 'AIzaSyDNQ0F0CqWmFQ2R3zEAuz27jRIu6lDiMtA';
 const FILTERS = [['all', 'All'], ['low', 'Critical'], ['medium', 'Moderate'], ['good', 'Good']];   
 
 export default function DeficiencyPage({ onBack, reportDeficiencies }) {

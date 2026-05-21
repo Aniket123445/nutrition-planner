@@ -13,7 +13,7 @@ const styles = {
   navLabel: { fontSize: '10px', color: '#3a4f3a', letterSpacing: '0.04em' },
 };
 
-const API_KEY = 'AIzaSyB3FcX-mthxsVcHPCgY51hf45Cic2RlMN0';
+const API_KEY = 'AIzaSyDNQ0F0CqWmFQ2R3zEAuz27jRIu6lDiMtA';
 
 async function callGemini(parts) {
   const res = await fetch(
